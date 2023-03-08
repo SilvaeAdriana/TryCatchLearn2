@@ -1,6 +1,7 @@
 using Api.Data;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using Core.Interfaces;//o import da interface não é identificado
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +21,8 @@ builder.Services.AddDbContext<StoreContext>(opt =>
     opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-
+//ADICIONANDO SERVIÇO DA INTERFACE(A INTERFACE É UM SERVIÇO AQUI)
+builder.Services.AddScoped<IProductRepository,ProductRepository>();//interface e sua classe
 
 var app = builder.Build();
 
